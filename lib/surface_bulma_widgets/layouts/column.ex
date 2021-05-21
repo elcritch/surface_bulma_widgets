@@ -1,4 +1,4 @@
-defmodule SurfaceBulmaWidgets.Layout.Column do
+defmodule SurfaceBulmaWidgets.Layouts.Column do
   use Surface.Component
   use SurfaceBulmaWidgets
 
