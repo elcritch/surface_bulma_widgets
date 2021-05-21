@@ -1,4 +1,4 @@
-defmodule SurfaceBulmaWidgets.Components.Slider do
+defmodule SurfaceBulmaWidgets.Components.Progress do
   use Surface.LiveComponent
   use SurfaceBulmaWidgets
 
@@ -17,19 +17,14 @@ defmodule SurfaceBulmaWidgets.Components.Slider do
 
   def render(assigns) do
     ~H"""
-      <progress class="progress is-primary" value="15" max="100">15%</progress>
-
-      <input
-        class={{ ["slider"] ++ @classes }}
+      <progress
+        class={{ ["progress"] ++ @classes }}
         aria-label={{@aria_label}}
         step={{@step}}
         min={{@min}}
         max={{@max}}
-        value={{@value}}
-        type="range"
-        readonly
-        disabled
-      >
+        value={{@value}} >
+      </progress>
     """
   end
 
