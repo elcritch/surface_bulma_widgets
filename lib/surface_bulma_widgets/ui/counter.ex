@@ -1,7 +1,8 @@
 defmodule SurfaceBulmaWidgets.UI.Counter do
   use Surface.LiveComponent
   alias SurfaceBulma.Button
-  use SurfaceWidgets.Bindings
+
+  use SurfaceBulmaWidgets
   require Logger
 
   # prop key, :atom, required: true
