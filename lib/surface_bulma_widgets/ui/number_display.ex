@@ -1,4 +1,4 @@
-defmodule SurfaceBulmaWidgets.NumberDisplay do
+defmodule SurfaceBulmaWidgets.UI.NumberDisplay do
   use Surface.LiveComponent
   alias SurfaceBulma.Button
 
