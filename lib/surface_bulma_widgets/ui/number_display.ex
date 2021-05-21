@@ -12,12 +12,10 @@ defmodule SurfaceBulmaWidgets.UI.NumberDisplay do
 
   prop digits, :integer, default: 3
 
-  # data count, :integer, default: 0
-
   def render(assigns) do
     ~H"""
     <div class="buttons has-addons is-centered is-marginless">
-      <Button class="number-display-lbtn button" active=true color="info" rounded>
+      <Button class="number-display-lbtn button" active=true color="info" rounded disabled>
         {{ @name || @id }}
       </Button>
       <Button class="number-display-rbtn button" active=true selected=false >
