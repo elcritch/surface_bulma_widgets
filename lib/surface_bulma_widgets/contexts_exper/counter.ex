@@ -43,16 +43,3 @@ defmodule SurfaceBulmaWidgets.Exper.UiContext.Counter do
     {:noreply, socket}
   end
 end
-
-# Using the component
-defmodule BtcClusterKioskWeb.ExampleLive do
-  use Surface.LiveView
-  alias BtcClusterKioskWeb.Surface.Hello
-
-  def render(assigns) do
-    ~H"""
-    See:<br>
-    <Hello id="hello1"/>
-    """
-  end
-end
