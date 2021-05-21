@@ -6,21 +6,18 @@ defmodule SurfaceBulmaWidgets.Components.Progress do
 
   @doc "If modal should be shown or not, defaults to false"
   prop aria_label, :string
+  prop classes, :any, default: []
 
-  prop step, :integer, default: 10
   prop min, :integer, default: 0
   prop max, :integer, default: 100
 
-  prop classes, :any, default: []
-
-  prop value, :integer, default: 20
+  prop value, :integer, required: true
 
   def render(assigns) do
     ~H"""
       <progress
         class={{ ["progress"] ++ @classes }}
         aria-label={{@aria_label}}
-        step={{@step}}
         min={{@min}}
         max={{@max}}
         value={{@value}} >

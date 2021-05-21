@@ -17,8 +17,6 @@ defmodule SurfaceBulmaWidgets.Components.Slider do
 
   def render(assigns) do
     ~H"""
-      <progress class="progress is-primary" value="15" max="100">15%</progress>
-
       <input
         class={{ ["slider"] ++ @classes }}
         aria-label={{@aria_label}}
