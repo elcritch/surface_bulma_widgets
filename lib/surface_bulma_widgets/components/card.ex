@@ -58,7 +58,6 @@ defmodule SurfaceBulmaWidgets.Components.Card do
 
       <div class="card-content">
         <slot name="content" />
-        <slot />
       </div>
 
       <footer class="card-footer">
