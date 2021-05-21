@@ -6,7 +6,7 @@ defmodule SurfaceBulmaWidgets.UI.NumberDisplay do
 
   require Logger
 
-  prop key, :any
+  prop name, :any, default: nil
 
   prop value, :tuple, default: {nil, 0}
 
@@ -18,7 +18,7 @@ defmodule SurfaceBulmaWidgets.UI.NumberDisplay do
     ~H"""
     <div class="buttons has-addons is-centered is-marginless">
       <Button class="number-display-lbtn button" active=true color="info" rounded>
-        {{ @key }}
+        {{ @name || @id }}
       </Button>
       <Button class="number-display-rbtn button" active=true selected=false >
         {{value(@value) |> format(@digits)}}
