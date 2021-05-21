@@ -16,7 +16,9 @@ defmodule BtcClusterKioskWeb.Surface.NumberDisplay do
     ~H"""
     <div class="buttons has-addons is-centered is-marginless">
       <Button class="number-display-lbtn button" active=true color="info" rounded>{{ @id }}</Button>
-      <Button class="number-display-rbtn button" active=true selected=false >{{ value(@value) |> format(@digits)  }}</Button>
+      <Button class="number-display-rbtn button" active=true selected=false >
+        {{value(@value) |> format(@digits)}}
+      </Button>
     </div>
     """
   end
