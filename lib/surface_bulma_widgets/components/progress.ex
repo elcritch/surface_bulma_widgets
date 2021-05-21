@@ -1,5 +1,5 @@
 defmodule SurfaceBulmaWidgets.Components.Progress do
-  use Surface.LiveComponent
+  use Surface.Component
   use SurfaceBulmaWidgets
 
   require Logger
@@ -23,11 +23,6 @@ defmodule SurfaceBulmaWidgets.Components.Progress do
         value={{@value}} >
       </progress>
     """
-  end
-
-  def handle_event(evt, data, socket) do
-    Logger.warn("slider changed: #{inspect {evt, data} }")
-    {:noreply, socket}
   end
 
 end
