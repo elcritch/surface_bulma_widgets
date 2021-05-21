@@ -21,11 +21,6 @@ defmodule SurfaceBulmaWidgets.Exper.UiContext.Counter do
     """
   end
 
-  def handle_event("test", _, socket) do
-    Logger.warn("clicked 'test' (#{inspect(socket.assigns.id)})")
-    {:noreply, socket}
-  end
-
   def handle_event("incr", _, socket) do
     Logger.warn("clicked 'incr' (#{inspect(socket.assigns.id)})")
     id = socket.assigns.id
