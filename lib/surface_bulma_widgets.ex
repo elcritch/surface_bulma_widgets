@@ -3,16 +3,14 @@ defmodule SurfaceBulmaWidgets do
   Documentation for `SurfaceBulmaWidgets`.
   """
 
+
   @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> SurfaceBulmaWidgets.hello()
-      :world
+  Use to import Bindings.
 
   """
-  def hello do
-    :world
+  defmacro __using__(_opts) do
+    quote do
+      import SurfaceBulmaWidgets.Bindings
+    end
   end
 end
