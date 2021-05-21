@@ -1,4 +1,4 @@
-defmodule BtcClusterKioskWeb.Surface.NumberDisplay do
+defmodule SurfaceBulmaWidgets.NumberDisplay do
   use Surface.LiveComponent
   alias SurfaceBulma.Button
 
