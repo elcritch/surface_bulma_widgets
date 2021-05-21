@@ -11,6 +11,10 @@ defmodule SurfaceBulmaWidgets.Components.Card do
     use Surface.Component, slot: "footer"
   end
 
+  defmodule Content do
+    use Surface.Component, slot: "content"
+  end
+
   @moduledoc """
   The card **modal**, with various configuration options.
   The modal is a stateless component and as such requires outside
@@ -40,9 +44,6 @@ defmodule SurfaceBulmaWidgets.Components.Card do
   @doc "content"
   slot content
 
-  @doc "Default slot"
-  slot default, required: true
-
   def render(assigns) do
     ~H"""
     <div class="card">
@@ -57,6 +58,7 @@ defmodule SurfaceBulmaWidgets.Components.Card do
 
       <div class="card-content">
         <slot name="content" />
+        <slot />
       </div>
 
       <footer class="card-footer">
