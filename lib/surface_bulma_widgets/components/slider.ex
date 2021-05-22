@@ -25,8 +25,6 @@ defmodule SurfaceBulmaWidgets.Components.Slider do
         max={{@max}}
         value={{@value}}
         type="range"
-        readonly
-        disabled
       >
     """
   end
