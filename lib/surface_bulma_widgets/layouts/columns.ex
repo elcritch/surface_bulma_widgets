@@ -2,14 +2,32 @@ defmodule SurfaceBulmaWidgets.Layouts.Columns do
   use Surface.Component
   use SurfaceBulmaWidgets
 
+  @doc "multiline"
+  prop multiline, :boolean, default: false
+
+  @doc "mobile"
+  prop mobile, :boolean, default: false
+
+  @doc "centered"
+  prop centered, :boolean, default: false
+
+  @doc "gapless"
+  prop gapless, :boolean, default: false
+
   @doc "columns"
   slot default
 
   def render(assigns) do
     ~H"""
-    <div class="columns">
-      <slot/>
-    </div>
+      <div class={{
+          "columns",
+          "is-multiline": @multiline,
+          "is-mobile": @mobile,
+          "is-centered": @centered,
+          "is-gapless": @gapless,
+            }} >
+        <slot/>
+      </div>
     """
   end
 end
