@@ -15,12 +15,11 @@ defmodule SurfaceBulmaWidgets.UI.NumberFlex do
 
   def render(assigns) do
     ~H"""
-      <article class="message px-1 my-1 is-small {{@classes}}" >
-
-        <div class="message-header my-1 py-1 " >
+      <article class="message is-small is-marginless {{@classes}}" >
+        <div class="message-header py-1" >
           {{ @name || @id }}
         </div>
-        <div class="message-body m-1 p-1 " >
+        <div class="message-body py-1 " >
           {{value(@value) |> format(@digits)}}
         </div>
       </article>
