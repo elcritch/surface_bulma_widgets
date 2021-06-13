@@ -9,15 +9,20 @@ defmodule SurfaceBulmaWidgets.UI.Flexer do
 
   prop direction, :string, values: ["row", "row-reverse", "column", "column-reverse"]
 
+  prop width, :integer, default: nil
+
   slot default, required: true
 
   def render(assigns) do
     ~H"""
-    <div class="is-flex {{ flexdir(@direction) }}">
+    <div class="is-flex {{ flexdir(@direction) }}" style="{{rem(@width)}}">
       <slot/>
     </div>
     """
   end
+
+  defp rem(nil), do: ""
+  defp rem(val), do: "width: #{val}em;"
 
   defp flexdir(val) do
     case val do
