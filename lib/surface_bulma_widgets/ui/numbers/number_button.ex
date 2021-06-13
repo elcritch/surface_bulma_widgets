@@ -19,10 +19,10 @@ defmodule SurfaceBulmaWidgets.UI.NumberButton do
   prop class, :css_class, default: []
 
   prop label_class, :css_class, default: []
+
   prop value_class, :css_class, default: []
 
-
-  prop rounded, :boolean, default: false
+  prop rounded, :any, values: [true, false, "left", "right"]
 
   def render(assigns) do
     ~H"""
@@ -33,18 +33,17 @@ defmodule SurfaceBulmaWidgets.UI.NumberButton do
       <button class={{["number-display-lbtn": true,
                         button: @class == [],
                         "is-#{@color}": @color,
-                        "is-#{@rounded}": @rounded,
-
+                        "is-rounded": @rounded in [true, "left"],
                         ] ++ @label_class }}
               style="pointer-events: none;"
               color={{@color}}
               rounded={{@rounded}} >
         {{ @name || @id }}
       </button>
-      <button class={{
-                ["number-display-rbtn": true,
-                  button: @class == [],
-                  ] ++ @value_class }}
+      <button class={{ ["number-display-rbtn": true,
+                        button: @class == [],
+                        "is-rounded": @rounded in [true, "right"],
+                        ] ++ @value_class }}
               style="pointer-events: none;"
                   >
         {{value(@value) |> format(@digits)}}
