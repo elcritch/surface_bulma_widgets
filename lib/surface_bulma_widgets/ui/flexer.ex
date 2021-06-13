@@ -1,7 +1,7 @@
 defmodule SurfaceBulmaWidgets.UI.Flexer do
   use Surface.LiveComponent
-
   use SurfaceBulmaWidgets
+  import SurfaceBulmaWidgets.UIUtils
 
   require Logger
 
@@ -23,9 +23,6 @@ defmodule SurfaceBulmaWidgets.UI.Flexer do
     </div>
     """
   end
-
-  defp joins(vals) when is_list(vals), do: Enum.join(vals, " ")
-  defp joins(val), do: val
 
   defp acontent(nil), do: ""
   defp acontent(val), do: "is-align-content-#{val}"
