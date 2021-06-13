@@ -1,4 +1,4 @@
-defmodule SurfaceBulmaWidgets.UI.NumberDisplay do
+defmodule SurfaceBulmaWidgets.UI.NumberButton do
   use Surface.LiveComponent
   alias SurfaceBulma.Button
 
@@ -12,13 +12,17 @@ defmodule SurfaceBulmaWidgets.UI.NumberDisplay do
 
   prop digits, :integer, default: 3
 
+  prop classes, :list, default: []
+
+  prop rounded, :boolean, default: false
+
   def render(assigns) do
     ~H"""
     <div class="buttons has-addons is-centered is-marginless">
-      <Button class="number-display-lbtn button" active=true color="info" rounded disabled>
+      <Button class="number-display-lbtn button {{@classes}}" active=true color="info" rounded={{@rounded}} disabled>
         {{ @name || @id }}
       </Button>
-      <Button class="number-display-rbtn button" active=true selected=false >
+      <Button class="number-display-rbtn button" active=true selected=false rounded={{@rounded}} >
         {{value(@value) |> format(@digits)}}
       </Button>
     </div>
