@@ -16,6 +16,7 @@ defmodule SurfaceBulmaWidgets.UI.NumberFlex do
   def render(assigns) do
     ~H"""
       <article class="message px-1 my-1 is-small {{@classes}}" >
+
         <div class="message-header my-1 py-1 " >
           {{ @name || @id }}
         </div>
