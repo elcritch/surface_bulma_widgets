@@ -1,14 +1,13 @@
 defmodule SurfaceBulmaWidgets.UI.NumberButton do
   use Surface.LiveComponent
-  alias SurfaceBulma.Button
-
   use SurfaceBulmaWidgets
+  import SurfaceBulmaWidgets.UI.NumberUtils
 
   require Logger
 
   prop name, :any, default: nil
 
-  prop value, :tuple, default: {nil, 0}
+  prop value, :number, default: 0.0
 
   prop digits, :integer, default: 3
 
@@ -24,15 +23,18 @@ defmodule SurfaceBulmaWidgets.UI.NumberButton do
 
   prop rounded, :any, values: [true, false, "left", "right"]
 
+  prop width, :integer, default: 6
+
   def render(assigns) do
     ~H"""
     <div class={{[buttons: true,
                   "has-addons": true,
-                  "is-centered": true,
+                  "is-flex-wrap-nowrap": true,
                   "is-marginless": true] ++ @class}} >
       <button class={{["number-display-lbtn": true,
                         button: @class == [],
                         "is-#{@color}": @color,
+                        "is-fullwidth": true,
                         "is-rounded": @rounded in [true, "left"],
                         ] ++ @label_class }}
               style="pointer-events: none;"
@@ -42,18 +44,14 @@ defmodule SurfaceBulmaWidgets.UI.NumberButton do
       </button>
       <button class={{ ["number-display-rbtn": true,
                         button: @class == [],
+                        "is-fullwidth": true,
                         "is-rounded": @rounded in [true, "right"],
                         ] ++ @value_class }}
-              style="pointer-events: none;"
-                  >
+              style={{[ ]}} >
         {{value(@value) |> format(@digits)}}
       </button>
     </div>
     """
   end
-
-  def format(nil, _digits), do: "-"
-  def format(value, digits) when is_integer(value), do: format(1.0*value, digits)
-  def format(value, digits) when is_float(value), do: :io_lib.format("~.#{digits}f",[value])
 
 end

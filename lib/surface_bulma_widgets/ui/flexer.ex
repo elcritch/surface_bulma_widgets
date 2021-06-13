@@ -8,6 +8,8 @@ defmodule SurfaceBulmaWidgets.UI.Flexer do
   prop classes, :list, default: []
 
   prop direction, :string, values: ["row", "row-reverse", "column", "column-reverse"]
+  prop justify, :string, values: ["flex-start", "flex-end", "center", "space-around", "space-evenly", "start", "end", "left", "right"]
+  prop align, :string, values: ["flex-start", "flex-end", "center", "space-between", "space-around", "space-evenly", "stretch", "start", "end", "left", "right", "baseline"]
 
   prop width, :integer, default: nil
 
@@ -15,11 +17,21 @@ defmodule SurfaceBulmaWidgets.UI.Flexer do
 
   def render(assigns) do
     ~H"""
-    <div class="is-flex {{ flexdir(@direction) }}" style="{{rem(@width)}}">
+    <div class="is-flex {{flexdir(@direction)}} {{jcontent(@justify)}} {{acontent(@align)}} {{@classes |> joins}}"
+         style="{{rem(@width)}}">
       <slot/>
     </div>
     """
   end
+
+  defp joins(vals) when is_list(vals), do: Enum.join(vals, " ")
+  defp joins(val), do: val
+
+  defp acontent(nil), do: ""
+  defp acontent(val), do: "is-align-content-#{val}"
+
+  defp jcontent(nil), do: ""
+  defp jcontent(val), do: "is-justify-content-#{val}"
 
   defp rem(nil), do: ""
   defp rem(val), do: "width: #{val}em;"
