@@ -1,7 +1,6 @@
 defmodule SurfaceBulmaWidgets.UI.Dropdown do
   use Surface.LiveComponent
   use SurfaceBulmaWidgets
-  import SurfaceBulmaWidgets.UI.NumberUtils
 
   require Logger
 
@@ -9,8 +8,10 @@ defmodule SurfaceBulmaWidgets.UI.Dropdown do
   prop aria_label, :string
   prop classes, :any, default: []
 
-  # prop text, :string
+  prop prefix, :string
   prop items, :list, default: []
+  prop items_type, :atom, values: [:string, :integer, :float]
+
   prop var, :tuple, default: {nil, 0}
 
 
@@ -19,9 +20,13 @@ defmodule SurfaceBulmaWidgets.UI.Dropdown do
       <div class="dropdown is-hoverable">
         <div class="dropdown-trigger">
           <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+            <div :if={{@prefix != nil}}>
+              <span :if={{@prefix != nil}}>{{@prefix}}</span>
+              <span>&nbsp;</span>
+            </div>
             <span>{{value(@var)}}</span>
             <span class="icon is-small">
-              <i class="fas fas-angle-down" aria-hidden="true"></i>
+              <i class="fas fas-angle-down" aria-hidden="true">↓</i>
             </span>
           </button>
         </div>
@@ -36,11 +41,12 @@ defmodule SurfaceBulmaWidgets.UI.Dropdown do
           </div>
         </div>
       </div>
+
     """
   end
 
-  def handle_event(evt, data, socket) do
-    Logger.warn("dropwdown changed: #{inspect {evt, data} }")
+  def handle_event("select", data, socket) do
+    Logger.warn("dropwdown selected: #{inspect data }")
     {:noreply, socket}
   end
 
