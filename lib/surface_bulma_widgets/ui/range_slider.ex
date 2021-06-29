@@ -43,10 +43,10 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
       </button>
       <button id={{@id <> "decrBtn"}} class={{button: true}}
               :on-click="decr"
+              phx-value-type="decr"
               rounded={{@rounded}}
               phx-hook="PhoenixCustomEvent"
-              phx-custom-event-mousedown="mousedown"
-              phx-target={{ @id }}
+              phx-custom-event-mousedown="startdecr"
           >▼</button>
       <progress
         class={{"progress",
