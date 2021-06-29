@@ -22,9 +22,9 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
 
   prop rounded, :boolean, default: true
 
-  prop width, :integer, default: 6
-
   prop digits, :integer, default: 1
+
+  prop widths, :map, default: %{}
 
   # data var, :integer, default: 0
 
@@ -33,22 +33,24 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
     <div class="buttons has-addons is-centered">
       <button class={{button: true,
                       "is-rounded": @rounded,
-                      "is-info": true }}>
+                      "is-info": true }}
+              style={{width: styleWidth(@widths[:label]) }} >
         {{ @name || key(@var) }}
       </button>
-      <button class={{button: true }} >
+      <button class={{button: true }}
+        style={{width: styleWidth(@widths[:number]) }}>
         {{value(@var) |> format(@digits)}}
       </button>
-      <Button click="decr" rounded={{@rounded}}>-</Button>
+      <Button click="decr" rounded={{@rounded}}>▼</Button>
       <progress
         class={{"progress",
                 "is-radiusless",
                 "is-fullwidth"}}
         max={{@max - @min}}
-        style="width: {{@width}}em; min-height: 2.4em; margin-top: 1em;"
+        style={{width: to_string(@widths[:progress] || 4) <> "em",  "min-height": "2.4em", "margin-top": "1em"}}
         value={{@var |> value() |> Kernel.-(@min)}} >
       </progress>
-      <Button click="incr" rounded={{@rounded}}>+</Button>
+      <Button click="incr" rounded={{@rounded}}>▲</Button>
     </div>
     """
   end

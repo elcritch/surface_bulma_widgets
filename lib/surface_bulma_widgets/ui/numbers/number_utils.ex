@@ -13,4 +13,10 @@ defmodule SurfaceBulmaWidgets.UI.NumberUtils do
     :io_lib.format("~.#{digits}f",[value])
   end
 
+  def styleWidth(nil) do
+    false
+  end
+  def styleWidth(ems) do
+    "#{ems}em"
+  end
 end
