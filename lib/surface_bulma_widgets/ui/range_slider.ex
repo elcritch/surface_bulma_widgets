@@ -10,7 +10,7 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
   prop var, :tuple, default: {nil, 20}, required: true
   prop channel, :string, default: nil
 
-  prop step, :integer, default: 0
+  prop step, :integer, default: 1
   prop min, :integer, default: 0
   prop max, :integer, default: 100
 
@@ -28,10 +28,9 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
 
       <progress
         class="progress is-radiusless number-display-lbtn "
-        min={{@min}}
-        max={{@max}}
+        max={{@max - @min}}
         style="width: 4em; min-height: 2.4em; margin-top: 1em;"
-        value={{@var |> value()}} >
+        value={{@var |> value() |> Kernel.-(@min)}} >
       </progress>
       <Button click="decr" rounded>-</Button>
       <Button click="incr" rounded>+</Button>
@@ -39,16 +38,15 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
     """
   end
 
-  def handle_event("incr", _, socket) do
-    # Logger.warn("clicked 'incr' (#{inspect(socket.assigns.id)})")
-    socket |> binding_update(:var, &(&1 + 1))
+  def handle_event("incr", data, socket) do
+    %{step: step, max: top} = socket.assigns
+    socket |> binding_update(:var, &(min(top, &1 + step)))
     {:noreply, socket}
   end
 
   def handle_event("decr", _, socket) do
-    # Logger.warn("clicked 'decr'")
-    socket |> binding_update(:var, &(&1 -1))
-
+    %{min: bottom, step: step} = socket.assigns
+    socket |> binding_update(:var, &(max(&1 - step, bottom)))
     {:noreply, socket}
   end
 end
