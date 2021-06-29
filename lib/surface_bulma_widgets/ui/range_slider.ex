@@ -14,11 +14,11 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
 
   prop channel, :string, default: nil
 
-  prop step, :integer, default: 1
+  prop step, :number, default: 1
 
-  prop min, :integer, default: 0
+  prop min, :number, default: 0
 
-  prop max, :integer, default: 100
+  prop max, :number, default: 100
 
   prop rounded, :boolean, default: true
 
