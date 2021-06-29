@@ -4,7 +4,7 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
 
   use SurfaceBulmaWidgets
   alias SurfaceBulmaWidgets.UI.Flexer
-  import SurfaceBulmaWidgets.UI.FloatUtils
+  import SurfaceBulmaWidgets.UI.NumberUtils
 
   require Logger
 
