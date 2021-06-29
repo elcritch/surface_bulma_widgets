@@ -41,7 +41,13 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
         style={{width: styleWidth(@widths[:number]) }}>
         {{value(@var) |> format(@digits)}}
       </button>
-      <Button click="decr" rounded={{@rounded}}>▼</Button>
+      <button id={{@id <> "decrBtn"}} class={{button: true}}
+              :on-click="decr"
+              rounded={{@rounded}}
+              phx-hook="PhoenixCustomEvent"
+              phx-custom-event-mousedown="mousedown"
+              phx-target={{ @id }}
+          >▼</button>
       <progress
         class={{"progress",
                 "is-radiusless",
@@ -50,7 +56,8 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
         style={{width: to_string(@widths[:progress] || 4) <> "em",  "min-height": "2.4em", "margin-top": "1em"}}
         value={{@var |> value() |> Kernel.-(@min)}} >
       </progress>
-      <Button click="incr" rounded={{@rounded}}>▲</Button>
+      <button class={{button: true}}
+              :on-click="incr" rounded={{@rounded}}>▲</button>
     </div>
     """
   end
@@ -64,6 +71,12 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
   def handle_event("decr", _, socket) do
     %{min: bottom, step: step} = socket.assigns
     socket |> binding_update(:var, &(max(&1 - step, bottom)))
+    {:noreply, socket}
+  end
+
+  def handle_event(otherevt, data, socket) do
+    Logger.warning("otherevt: #{inspect otherevt}")
+    Logger.warning("otherevt: data: #{inspect data}")
     {:noreply, socket}
   end
 end
