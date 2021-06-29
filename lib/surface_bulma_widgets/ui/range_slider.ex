@@ -3,7 +3,6 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
   alias SurfaceBulma.Button
 
   use SurfaceBulmaWidgets
-  alias SurfaceBulmaWidgets.Components.Progress
 
   require Logger
 
@@ -11,6 +10,7 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
   prop var, :tuple, default: {nil, 20}, required: true
   prop channel, :string, default: nil
 
+  prop step, :integer, default: 0
   prop min, :integer, default: 0
   prop max, :integer, default: 100
 
@@ -33,8 +33,8 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
         style="width: 4em; min-height: 2.4em; margin-top: 1em;"
         value={{@var |> value()}} >
       </progress>
-      <Button click="incr" rounded>+</Button>
       <Button click="decr" rounded>-</Button>
+      <Button click="incr" rounded>+</Button>
     </div>
     """
   end

@@ -22,7 +22,11 @@ defmodule SurfaceBulmaWidgets.UI.Dropdown do
 
   def render(assigns) do
     ~H"""
-      <div class="dropdown {{cond do @hoverable -> "is-hoverable"; @active -> "is-active"; true -> "" end}}">
+      <div class="dropdown {{cond do
+          @hoverable -> "is-hoverable"
+          @active -> "is-active";
+          true -> ""
+        end}}">
         <div class="dropdown-trigger">
           <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
             <div :if={{@prefix != nil}}>
