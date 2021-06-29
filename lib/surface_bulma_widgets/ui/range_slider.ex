@@ -44,8 +44,8 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
       <button id={{@id <> "decrBtn"}} class={{button: true}}
               :on-click="decr"
               phx-value-action="decr"
-              rounded={{@rounded}}
               phx-hook="PhxRepeatClick"
+              rounded={{@rounded}}
           >▼</button>
       <progress
         class={{"progress",
@@ -55,33 +55,27 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
         style={{width: to_string(@widths[:progress] || 4) <> "em",  "min-height": "2.4em", "margin-top": "1em"}}
         value={{@var |> value() |> Kernel.-(@min)}} >
       </progress>
-      <button class={{button: true}}
-              :on-click="incr" rounded={{@rounded}}>▲</button>
+      <button id={{@id <> "incrBtn"}}
+              class={{button: true}}
+              :on-click="incr"
+              phx-value-action="incr"
+              phx-hook="PhxRepeatClick"
+              rounded={{@rounded}}>▲</button>
     </div>
     """
   end
 
-  def handle_event("incr", data, socket) do
-    %{step: step, max: top} = socket.assigns
-    socket |> binding_update(:var, &(min(top, &1 + step)))
-    {:noreply, socket}
-  end
 
-  def handle_event("decr", data, socket) do
-    Logger.warning("decr: #{inspect "decr"}")
-    Logger.warning("decr: data: #{inspect data}")
-    %{min: bottom, step: step} = socket.assigns
-    socket |> binding_update(:var, &(max(&1 - step, bottom)))
-    {:noreply, socket}
-  end
-
-  def handle_event("clicking", data, socket) do
-    Logger.warning("otherevt: #{inspect "clicking"}")
+  def handle_event(evt, data, socket) do
+    Logger.warning("otherevt: #{inspect evt}")
     Logger.warning("otherevt: data: #{inspect data}")
     case data["action"] do
       "decr" ->
         %{min: bottom, step: step} = socket.assigns
         socket |> binding_update(:var, &(max(&1 - step, bottom)))
+      "incr" ->
+        %{step: step, max: top} = socket.assigns
+        socket |> binding_update(:var, &(min(top, &1 + step)))
     end
 
     {:noreply, socket}
