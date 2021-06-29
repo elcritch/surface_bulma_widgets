@@ -46,7 +46,8 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
               phx-value-type="decr"
               rounded={{@rounded}}
               phx-hook="PhoenixCustomEvent"
-              phx-custom-event-mousedown="startdecr"
+              phx-custom-event-mousedown="start"
+              phx-custom-event-mouseup="stop"
           >▼</button>
       <progress
         class={{"progress",
@@ -69,14 +70,37 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
   end
 
   def handle_event("decr", _, socket) do
+    Logger.warning("otherevt: #{inspect "decr"}")
     %{min: bottom, step: step} = socket.assigns
     socket |> binding_update(:var, &(max(&1 - step, bottom)))
     {:noreply, socket}
+  end
+
+  def handle_event("start", data, socket) do
+    Logger.warning("otherevt: #{inspect "start"}")
+    Logger.warning("otherevt: data: #{inspect data}")
+    {:noreply, socket |> set_timer()}
   end
 
   def handle_event(otherevt, data, socket) do
     Logger.warning("otherevt: #{inspect otherevt}")
     Logger.warning("otherevt: data: #{inspect data}")
     {:noreply, socket}
+  end
+
+  def handle_info(otherevt, socket) do
+    Logger.warning("info: #{inspect otherevt}")
+    {:noreply, socket}
+  end
+
+  def set_timer(%{assigns: assigns} = socket) do
+    if assigns[:task] do
+      Task.shutdown(assigns[:task])
+    end
+    task = Task.async(fn ->
+      Process.sleep(1_000)
+      send_update __MODULE__, id: assigns.id, board_id: socket.assigns.id
+    end)
+    socket |> assign(task: task)
   end
 end
