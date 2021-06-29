@@ -43,11 +43,9 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
       </button>
       <button id={{@id <> "decrBtn"}} class={{button: true}}
               :on-click="decr"
-              phx-value-type="decr"
+              phx-value-action="decr"
               rounded={{@rounded}}
-              phx-hook="PhoenixCustomEvent"
-              phx-custom-event-mousedown="start"
-              phx-custom-event-mouseup="stop"
+              phx-hook="PhxRepeatClick"
           >▼</button>
       <progress
         class={{"progress",
@@ -69,38 +67,24 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
     {:noreply, socket}
   end
 
-  def handle_event("decr", _, socket) do
-    Logger.warning("otherevt: #{inspect "decr"}")
+  def handle_event("decr", data, socket) do
+    Logger.warning("decr: #{inspect "decr"}")
+    Logger.warning("decr: data: #{inspect data}")
     %{min: bottom, step: step} = socket.assigns
     socket |> binding_update(:var, &(max(&1 - step, bottom)))
     {:noreply, socket}
   end
 
-  def handle_event("start", data, socket) do
-    Logger.warning("otherevt: #{inspect "start"}")
+  def handle_event("clicking", data, socket) do
+    Logger.warning("otherevt: #{inspect "clicking"}")
     Logger.warning("otherevt: data: #{inspect data}")
-    {:noreply, socket |> set_timer()}
-  end
-
-  def handle_event(otherevt, data, socket) do
-    Logger.warning("otherevt: #{inspect otherevt}")
-    Logger.warning("otherevt: data: #{inspect data}")
-    {:noreply, socket}
-  end
-
-  def handle_info(otherevt, socket) do
-    Logger.warning("info: #{inspect otherevt}")
-    {:noreply, socket}
-  end
-
-  def set_timer(%{assigns: assigns} = socket) do
-    if assigns[:task] do
-      Task.shutdown(assigns[:task])
+    case data["action"] do
+      "decr" ->
+        %{min: bottom, step: step} = socket.assigns
+        socket |> binding_update(:var, &(max(&1 - step, bottom)))
     end
-    task = Task.async(fn ->
-      Process.sleep(1_000)
-      send_update __MODULE__, id: assigns.id, board_id: socket.assigns.id
-    end)
-    socket |> assign(task: task)
+
+    {:noreply, socket}
   end
+
 end
