@@ -3,6 +3,8 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
   alias SurfaceBulma.Button
 
   use SurfaceBulmaWidgets
+  alias SurfaceBulmaWidgets.UI.Flexer
+  import SurfaceBulmaWidgets.UI.FloatUtils
 
   require Logger
 
@@ -13,10 +15,17 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
   prop channel, :string, default: nil
 
   prop step, :integer, default: 1
+
   prop min, :integer, default: 0
+
   prop max, :integer, default: 100
 
   prop rounded, :boolean, default: true
+
+  prop width, :integer, default: 6
+
+  prop digits, :integer, default: 1
+
   # data var, :integer, default: 0
 
   def render(assigns) do
@@ -28,15 +37,15 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
         {{ @name || key(@var) }}
       </button>
       <button class={{button: true }} >
-        {{ value(@var) }}
+        {{value(@var) |> format(@digits)}}
       </button>
-      <Button click="decr" rounded>-</Button>
+      <Button click="decr" rounded={{@rounded}}>-</Button>
       <progress
         class={{"progress",
                 "is-radiusless",
                 "is-fullwidth"}}
         max={{@max - @min}}
-        style="width: 6em; min-height: 2.4em; margin-top: 1em;"
+        style="width: {{@width}}em; min-height: 2.4em; margin-top: 1em;"
         value={{@var |> value() |> Kernel.-(@min)}} >
       </progress>
       <Button click="incr" rounded={{@rounded}}>+</Button>
