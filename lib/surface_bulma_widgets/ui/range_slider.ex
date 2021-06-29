@@ -7,33 +7,39 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
   require Logger
 
   # prop key, :atom, required: true
-  prop var, :tuple, default: {nil, 20}, required: true
+  prop name, :string, default: nil
+  prop var, :tuple, required: true
+
   prop channel, :string, default: nil
 
   prop step, :integer, default: 1
   prop min, :integer, default: 0
   prop max, :integer, default: 100
 
+  prop rounded, :boolean, default: true
   # data var, :integer, default: 0
 
   def render(assigns) do
     ~H"""
     <div class="buttons has-addons is-centered">
-      <button class={{ "button", "is-rounded", "is-info" }}>
-        {{ key(@var) }}
+      <button class={{button: true,
+                      "is-rounded": @rounded,
+                      "is-info": true }}>
+        {{ @name || key(@var) }}
       </button>
-      <button class={{ "button" }} style="width: 4em;">
+      <button class={{button: true }} >
         {{ value(@var) }}
       </button>
-
+      <Button click="decr" rounded>-</Button>
       <progress
-        class="progress is-radiusless number-display-lbtn "
+        class={{"progress",
+                "is-radiusless",
+                "is-fullwidth"}}
         max={{@max - @min}}
-        style="width: 4em; min-height: 2.4em; margin-top: 1em;"
+        style="width: 6em; min-height: 2.4em; margin-top: 1em;"
         value={{@var |> value() |> Kernel.-(@min)}} >
       </progress>
-      <Button click="decr" rounded>-</Button>
-      <Button click="incr" rounded>+</Button>
+      <Button click="incr" rounded={{@rounded}}>+</Button>
     </div>
     """
   end
