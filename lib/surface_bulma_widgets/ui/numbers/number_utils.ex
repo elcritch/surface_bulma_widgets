@@ -6,6 +6,10 @@ defmodule SurfaceBulmaWidgets.UI.NumberUtils do
     "-"
   end
 
+  def format(value, "-") do
+    value |> to_string()
+  end
+
   @doc """
   Format should be string of "x.y" format
   where x is the characteristic
