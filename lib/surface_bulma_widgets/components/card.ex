@@ -7,6 +7,10 @@ defmodule SurfaceBulmaWidgets.Components.Card do
     use Surface.Component, slot: "header"
   end
 
+  defmodule Default do
+    use Surface.Component, slot: "default"
+  end
+
   defmodule Footer do
     use Surface.Component, slot: "footer"
   end
@@ -25,9 +29,6 @@ defmodule SurfaceBulmaWidgets.Components.Card do
   @doc "Footer content, use via Modal.Footer"
   slot footer
 
-  @doc "Image"
-  slot image
-
   @doc "content"
   slot default, required: true
 
@@ -35,16 +36,13 @@ defmodule SurfaceBulmaWidgets.Components.Card do
   def render(assigns) do
     ~H"""
     <div class="card">
-
-
       <div class="card-content">
-        <slot/>
+        <slot />
       </div>
 
       <footer :if={{slot_assigned?(:footer)}} class="card-footer">
           <slot name="footer" />
       </footer>
-
     </div>
     """
   end
