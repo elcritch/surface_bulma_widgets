@@ -26,7 +26,7 @@ defmodule SurfaceBulmaWidgets.Bindings do
   end
 
   def binding_send(socket, msg) do
-    case socket.assigns.channel do
+    case socket.assigns[:channel] do
       {mod, name} ->
         Phoenix.PubSub.broadcast(mod, name, msg)
       _other ->
