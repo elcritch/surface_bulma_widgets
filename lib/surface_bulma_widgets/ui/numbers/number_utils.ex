@@ -15,6 +15,7 @@ defmodule SurfaceBulmaWidgets.UI.NumberUtils do
     lfmt =
       fmt
       |> String.split(".")
+      |> Enum.map(fn "" -> "0"; x -> x end)
       |> Enum.map(fn nstr -> {num, _rest} = Integer.parse(nstr); num end)
       |> Kernel.++([0])
       |> Enum.slice(0..1)
