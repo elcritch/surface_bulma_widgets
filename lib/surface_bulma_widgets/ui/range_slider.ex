@@ -22,7 +22,7 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
 
   prop rounded, :boolean, default: true
 
-  prop digits, :integer, default: 1
+  prop digits, :string, default: "4.1"
 
   prop widths, :map, default: %{}
 

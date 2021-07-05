@@ -9,7 +9,7 @@ defmodule SurfaceBulmaWidgets.UI.NumberButton do
 
   prop value, :number, default: 0.0
 
-  prop digits, :integer, default: 3
+  prop digits, :string, default: "4.1"
 
   prop color, :any, default: "primary"
   prop rcolor, :any, default: "primary"
@@ -48,7 +48,9 @@ defmodule SurfaceBulmaWidgets.UI.NumberButton do
                         "is-rounded": @rounded in [true, "right"],
                         ] ++ @value_class }}
               style={{[ ]}} >
-        {{value(@value) |> format(@digits)}}
+        <samp>
+          {{value(@value) |> format(@digits)}}
+        </samp>
       </button>
     </div>
     """

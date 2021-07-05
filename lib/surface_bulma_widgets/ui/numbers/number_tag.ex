@@ -9,7 +9,7 @@ defmodule SurfaceBulmaWidgets.UI.NumberTag do
 
   prop value, :number, default: 0.0
 
-  prop digits, :integer, default: 3
+  prop digits, :string, default: "5.1"
 
   prop color, :any, default: "primary"
   prop rcolor, :any, default: "primary"
@@ -19,7 +19,7 @@ defmodule SurfaceBulmaWidgets.UI.NumberTag do
 
   prop rounded, :any, values: [true, false, "left", "right"]
 
-  prop width, :integer, default: 6
+  prop widths, :map, default: %{}
 
   def render(assigns) do
     ~H"""
@@ -36,9 +36,10 @@ defmodule SurfaceBulmaWidgets.UI.NumberTag do
         {{ @name || @id }}
       </span>
       <span class={{["number-display-rtag": true,
-                     tag: true] ++ @value_class }}
-              style={{[ ]}} >
+                     tag: true] ++ @value_class }} >
+        <samp style={{width: styleWidth(@widths[:number]) }} >
         {{value(@value) |> format(@digits)}}
+        </samp>
       </span>
     </div>
     """
