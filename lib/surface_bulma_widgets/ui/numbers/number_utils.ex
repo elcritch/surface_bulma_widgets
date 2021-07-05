@@ -24,7 +24,6 @@ defmodule SurfaceBulmaWidgets.UI.NumberUtils do
       |> Kernel.++([0])
       |> Enum.slice(0..1)
 
-    Logger.info("FMT: str: #{inspect lfmt}")
     format(value, lfmt)
   end
 
