@@ -39,24 +39,24 @@ defmodule SurfaceBulmaWidgets.Components.NumberEditor do
           <Card icon="fa-code" title="UI Components">
             <div >
               <div class="buttons mb-0">
-                <button class="button is-medium">1</button>
-                <button class="button is-medium">2</button>
-                <button class="button is-medium">3</button>
+                <button class="button is-medium is-family-monospace	">1</button>
+                <button class="button is-medium is-family-monospace	">2</button>
+                <button class="button is-medium is-family-monospace	">3</button>
               </div>
               <div class="buttons mb-0">
-                <button class="button is-medium">4</button>
-                <button class="button is-medium">5</button>
-                <button class="button is-medium">6</button>
+                <button class="button is-medium is-family-monospace	">4</button>
+                <button class="button is-medium is-family-monospace	">5</button>
+                <button class="button is-medium is-family-monospace	">6</button>
               </div>
               <div class="buttons mb-0">
-                <button class="button is-medium">7</button>
-                <button class="button is-medium">8</button>
-                <button class="button is-medium">9</button>
+                <button class="button is-medium is-family-monospace	">7</button>
+                <button class="button is-medium is-family-monospace	">8</button>
+                <button class="button is-medium is-family-monospace	">9</button>
               </div>
-              <div class="buttons">
-                <button class="button is-medium">0</button>
-                <button class="button is-medium">.</button>
-                <button class="button is-small">⌫</button>
+              <div class="buttons mb-0">
+                <button class="button is-medium is-family-monospace	">.</button>
+                <button class="button is-medium is-family-monospace	">0</button>
+                <button class="button is-medium is-family-monospace	">⌫</button>
               </div>
             </div>
 
