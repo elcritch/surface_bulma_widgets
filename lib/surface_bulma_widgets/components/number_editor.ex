@@ -28,6 +28,33 @@ defmodule SurfaceBulmaWidgets.Components.NumberEditor do
   @doc "Header content, use via Modal.Header"
   # slot(default, required: true)
 
+  def number_pad(assigns) do
+    ~H"""
+                    <div class="box m-0">
+                      <div class="buttons my-0">
+                        <button class="button is-medium is-family-monospace	">1</button>
+                        <button class="button is-medium is-family-monospace	">2</button>
+                        <button class="button is-medium is-family-monospace	">3</button>
+                      </div>
+                      <div class="buttons my-0">
+                        <button class="button is-medium is-family-monospace	">4</button>
+                        <button class="button is-medium is-family-monospace	">5</button>
+                        <button class="button is-medium is-family-monospace	">6</button>
+                      </div>
+                      <div class="buttons my-0">
+                        <button class="button is-medium is-family-monospace	">7</button>
+                        <button class="button is-medium is-family-monospace	">8</button>
+                        <button class="button is-medium is-family-monospace	">9</button>
+                      </div>
+                      <div class="buttons my-0">
+                        <button class="button is-medium is-family-monospace	">.</button>
+                        <button class="button is-medium is-family-monospace	">0</button>
+                        <button class="button is-medium is-family-monospace	">⌫</button>
+                      </div>
+                    </div>
+    """
+
+  end
   def render(assigns) do
     ~H"""
     <article >
@@ -36,37 +63,27 @@ defmodule SurfaceBulmaWidgets.Components.NumberEditor do
         </div>
 
         <div class="modal-content">
-          <Card icon="fa-code" title="UI Components">
-            <div >
-              <div class="buttons mb-0">
-                <button class="button is-medium is-family-monospace	">1</button>
-                <button class="button is-medium is-family-monospace	">2</button>
-                <button class="button is-medium is-family-monospace	">3</button>
-              </div>
-              <div class="buttons mb-0">
-                <button class="button is-medium is-family-monospace	">4</button>
-                <button class="button is-medium is-family-monospace	">5</button>
-                <button class="button is-medium is-family-monospace	">6</button>
-              </div>
-              <div class="buttons mb-0">
-                <button class="button is-medium is-family-monospace	">7</button>
-                <button class="button is-medium is-family-monospace	">8</button>
-                <button class="button is-medium is-family-monospace	">9</button>
-              </div>
-              <div class="buttons mb-0">
-                <button class="button is-medium is-family-monospace	">.</button>
-                <button class="button is-medium is-family-monospace	">0</button>
-                <button class="button is-medium is-family-monospace	">⌫</button>
-              </div>
-            </div>
 
-            <Button type={{nil}}
-                :if={{@show_close_button}}
-                click="editor-click"
-                value="close"
-                class="modal-close is-large"
-                aria_label="close">
-            </Button>
+          <Card icon="fa-code" title="UI Components">
+
+              <div class="tile is-ancestor">
+
+                <div class="columns ">
+                  <div class="column is-4">
+                    Number
+                  </div>
+                  <div class="column is-4">
+                  </div>
+                </div>
+
+                <Button type={{nil}}
+                    :if={{@show_close_button}}
+                    click="editor-click"
+                    value="close"
+                    class="modal-close is-large"
+                    aria_label="close">
+                </Button>
+              </div>
 
             <Card.Footer>
               <Button color="primary"
