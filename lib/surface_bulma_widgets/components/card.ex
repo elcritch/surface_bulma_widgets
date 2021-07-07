@@ -32,11 +32,12 @@ defmodule SurfaceBulmaWidgets.Components.Card do
   @doc "content"
   slot default, required: true
 
+  prop classes, :any, default: []
 
   def render(assigns) do
     ~H"""
-    <div class="card">
-      <div class="card-content">
+    <div class={{ ["card"] ++ @classes }} >
+      <div class="card-content ">
         <slot />
       </div>
 

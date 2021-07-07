@@ -2,7 +2,7 @@ defmodule SurfaceBulmaWidgets.Components.NumberEditor do
   use Surface.LiveComponent
   use SurfaceBulmaWidgets
   alias SurfaceBulma.Button
-  alias SurfaceBulma.Modal
+  alias SurfaceBulmaWidgets.Components.Modal
   alias SurfaceBulmaWidgets.Components.Card
 
   require Logger
@@ -31,56 +31,32 @@ defmodule SurfaceBulmaWidgets.Components.NumberEditor do
 
   def number_pad(assigns) do
     ~H"""
-      <div class=" box m-0">
-        <div class="buttons my-0">
-          <button class="button is-medium is-family-monospace	">1</button>
-          <button class="button is-medium is-family-monospace	">2</button>
-          <button class="button is-medium is-family-monospace	">3</button>
-        </div>
-        <div class="buttons my-0">
-          <button class="button is-medium is-family-monospace	">4</button>
-          <button class="button is-medium is-family-monospace	">5</button>
-          <button class="button is-medium is-family-monospace	">6</button>
-        </div>
-        <div class="buttons my-0">
-          <button class="button is-medium is-family-monospace	">7</button>
-          <button class="button is-medium is-family-monospace	">8</button>
-          <button class="button is-medium is-family-monospace	">9</button>
-        </div>
-        <div class="buttons my-0">
-          <button class="button is-medium is-family-monospace	">.</button>
-          <button class="button is-medium is-family-monospace	">0</button>
-          <button class="button is-medium is-family-monospace	">⌫</button>
-        </div>
+        <form :on-change="select" :on-submit="submitted">
+      <div class="field has-addons">
+          <div class="control">
+            <a class="button is-info is-large">
+              Search
+            </a>
+          </div>
+          <div class="control is-flex-grow-3">
+              <input class="input is-large" type="number" id="tentacles" name="tentacles" min="10" max="100">
+          </div>
       </div>
+        </form>
     """
 
   end
   def render(assigns) do
     ~H"""
       <div>
-        <Modal show={{value(@var)}}>
-          <Card>
-            <div class="columns ">
-              <div class="column ">
-              </div>
-              <div class="column is-5 ">
+        <Modal classes={{["is-justify-content-flex-start"]}} show={{value(@var)}}>
+          <Card classes={{["pt-0"]}}>
                 {{ number_pad(assigns) }}
-              </div>
-            </div>
 
             <Card.Footer>
-              <Button color="primary"
-                click="editor-set"
-                aria_label="close">
-                Accept
-              </Button>
-              <Button color="danger"
-                value="close"
-                click="editor-click"
-                aria_label="close">
-                Close
-              </Button>
+                <a href="#" class="card-footer-item">Save</a>
+                <a href="#" class="card-footer-item">Reset</a>
+                <a href="#" class="card-footer-item">Cancel</a>
             </Card.Footer>
           </Card>
         </Modal>
@@ -111,4 +87,10 @@ defmodule SurfaceBulmaWidgets.Components.NumberEditor do
     socket |> binding_update(:var, fn _v -> false end)
     {:noreply, socket}
   end
+
+  def handle_event(evt, data, socket) do
+    Logger.warn("select selected: #{inspect evt} => #{inspect data}")
+    {:noreply, socket}
+  end
+
 end
