@@ -22,11 +22,11 @@ defmodule SurfaceBulmaWidgets.UI.Dropdown do
 
   def render(assigns) do
     ~F"""
-      <div class="dropdown {cond do
-          @hoverable -> "is-hoverable"
-          @active -> "is-active";
-          true -> ""
-        end}">
+      <div class={["dropdown"] ++ cond do
+          @hoverable -> ["is-hoverable"]
+          @active -> ["is-active"]
+          true -> [""]
+        end}>
         <div class="dropdown-trigger">
           <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
             <div :if={@prefix != nil}>
@@ -41,12 +41,11 @@ defmodule SurfaceBulmaWidgets.UI.Dropdown do
         </div>
         <div class="dropdown-menu" id="dropdown-menu" role="menu">
           <div class="dropdown-content">
-            <a href="#" :for={ item <- @items }
-               :on-click="select"
-               phx-value-value="{item}"
-               class={"dropdown-item", "is-active": item == value(@var) }>
-              {item}
-            </a>
+            {#for item <- @items}
+              <a href="#" :on-click="select" phx-value-value={item} class={"dropdown-item", "is-active": item == value(@var) }>
+                {item}
+              </a>
+            {/for}
           </div>
         </div>
       </div>
