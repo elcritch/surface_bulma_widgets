@@ -18,14 +18,14 @@ defmodule SurfaceBulmaWidgets.Layouts.Columns do
   slot default
 
   def render(assigns) do
-    ~H"""
-      <div class={{
-          "columns",
-          "is-multiline": @multiline,
-          "is-mobile": @mobile,
-          "is-centered": @centered,
-          "is-gapless": @gapless,
-            }} >
+    ~F"""
+      <div class={
+            "columns",
+            "is-multiline": @multiline,
+            "is-mobile": @mobile,
+            "is-centered": @centered,
+            "is-gapless": @gapless
+          } >
         <slot/>
       </div>
     """
@@ -59,15 +59,15 @@ defmodule SurfaceBulmaWidgets.Layouts.Column do
 
 
   def render(assigns) do
-    ~H"""
+    ~F"""
     <div
-        aria-label={{@aria_label}}
-        class={{
+        aria-label={@aria_label}
+        class={
           ["column",
           "is-#{@width}": @width > 0,
           "is-offset-#{@offset}": @offset > 0,
           "is-narrow": @narrow,
-        ] ++ @classes }}>
+        ] ++ @classes }>
       <slot>
       </slot>
     </div>

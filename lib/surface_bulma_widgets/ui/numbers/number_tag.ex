@@ -22,23 +22,23 @@ defmodule SurfaceBulmaWidgets.UI.NumberTag do
   prop widths, :map, default: %{}
 
   def render(assigns) do
-    ~H"""
-    <div class={{tags: true,
+    ~F"""
+    <div class={tags: true,
                  "has-addons": true,
-                 "is-flex-wrap-nowrap": true}} >
-      <span class={{["number-display-ltag": true,
+                 "is-flex-wrap-nowrap": true} >
+      <span class={["number-display-ltag": true,
                      tag: true,
                      "is-#{@color}": @color,
-                    ] ++ @label_class }}
+                    ] ++ @label_class }
               style="pointer-events: none;"
-              color={{@color}}
-              rounded={{@rounded}} >
-        {{ @name || @id }}
+              color={@color}
+              rounded={@rounded} >
+        { @name || @id }
       </span>
-      <span class={{["number-display-rtag": true,
-                     tag: true] ++ @value_class }} >
-        <samp style={{width: styleWidth(@widths[:number]) }} >
-        {{value(@value) |> format(@digits)}}
+      <span class={["number-display-rtag": true,
+                     tag: true] ++ @value_class } >
+        <samp style={width: styleWidth(@widths[:number]) } >
+        {value(@value) |> format(@digits)}
         </samp>
       </span>
     </div>

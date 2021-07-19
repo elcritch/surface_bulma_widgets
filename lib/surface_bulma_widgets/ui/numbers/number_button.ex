@@ -26,30 +26,30 @@ defmodule SurfaceBulmaWidgets.UI.NumberButton do
   prop width, :integer, default: 6
 
   def render(assigns) do
-    ~H"""
-    <div class={{[buttons: true,
+    ~F"""
+    <div class={[buttons: true,
                   "has-addons": true,
                   "is-flex-wrap-nowrap": true,
-                  "is-marginless": true] ++ @class}} >
-      <button class={{["number-display-lbtn": true,
+                  "is-marginless": true] ++ @class} >
+      <button class={["number-display-lbtn": true,
                         button: @class == [],
                         "is-#{@color}": @color,
                         "is-fullwidth": true,
                         "is-rounded": @rounded in [true, "left"],
-                        ] ++ @label_class }}
+                        ] ++ @label_class }
               style="pointer-events: none;"
-              color={{@color}}
-              rounded={{@rounded}} >
-        {{ @name || @id }}
+              color={@color}
+              rounded={@rounded} >
+        { @name || @id }
       </button>
-      <button class={{ ["number-display-rbtn": true,
+      <button class={ ["number-display-rbtn": true,
                         button: @class == [],
                         "is-fullwidth": true,
                         "is-rounded": @rounded in [true, "right"],
-                        ] ++ @value_class }}
-              style={{[ ]}} >
+                        ] ++ @value_class }
+              style={[ ]} >
         <samp>
-          {{value(@value) |> format(@digits)}}
+          {value(@value) |> format(@digits)}
         </samp>
       </button>
     </div>

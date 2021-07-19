@@ -18,16 +18,14 @@ defmodule SurfaceBulmaWidgets.UI.Flexer do
   slot default, required: true
 
   def render(assigns) do
-    ~H"""
+    ~F"""
     <div class="is-flex
-                {{flexdir(@direction)}}
-                {{jcontent(@justify)}}
-                {{acontent(@align)}}
-                {{aicontent(@align_items)}}
-                {{wrcontent(@wrap)}}
-                {{@classes |> joins}}"
-         style="{{rem(@width)}}"
-         >
+                {flexdir(@direction)}
+                {jcontent(@justify)}
+                {acontent(@align)}
+                {aicontent(@align_items)}
+                {wrcontent(@wrap)}
+                {joins(@classes)}" style={rem(@width)} >
       <slot/>
     </div>
     """

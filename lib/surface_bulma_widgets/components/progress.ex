@@ -14,13 +14,13 @@ defmodule SurfaceBulmaWidgets.Components.Progress do
   prop value, :integer, required: true
 
   def render(assigns) do
-    ~H"""
+    ~F"""
       <progress
-        class={{ ["progress"] ++ @classes }}
-        aria-label={{@aria_label}}
-        min={{@min}}
-        max={{@max}}
-        value={{@value}} >
+        class={ ["progress"] ++ @classes }
+        aria-label={@aria_label}
+        min={@min}
+        max={@max}
+        value={@value} >
       </progress>
     """
   end

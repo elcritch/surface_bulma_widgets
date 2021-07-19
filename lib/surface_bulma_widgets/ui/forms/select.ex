@@ -13,7 +13,7 @@ defmodule SurfaceBulmaWidgets.UI.Select do
 
 
   def render(assigns) do
-    ~H"""
+    ~F"""
       <div class="field">
         <form :on-change="select">
           <label class="label">
@@ -22,9 +22,11 @@ defmodule SurfaceBulmaWidgets.UI.Select do
           <div class="control">
             <div class="select">
               <select name="doselect">
-                <option :for={{item <- @items}}>
-                  {{item}}
-                </option>
+                {#for item <- @items}
+                  <option >
+                    {item}
+                  </option>
+                {/for}
               </select>
             </div>
           </div>

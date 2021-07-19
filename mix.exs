@@ -21,8 +21,8 @@ defmodule SurfaceBulmaWidgets.MixProject do
     [
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:jason, "~> 1.0"},
-      {:surface, "~> 0.4.1", override: true},
-      {:surface_bulma, github: "surface-ui/surface_bulma"},
+      {:surface, "~> 0.5.1"},
+      {:surface_bulma, "~> 0.2.0"}
     ]
   end
 end

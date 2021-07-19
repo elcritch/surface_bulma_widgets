@@ -13,7 +13,7 @@ defmodule SurfaceBulmaWidgets.UI.Forms.NumberInput do
 
 
   def render(assigns) do
-    ~H"""
+    ~F"""
       <div class="field">
         <form :on-change="select" :on-submit="submitted">
           <label class="label">

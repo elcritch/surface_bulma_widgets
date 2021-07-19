@@ -29,38 +29,37 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
   # data var, :integer, default: 0
 
   def render(assigns) do
-    ~H"""
+    ~F"""
     <div class="buttons has-addons is-centered">
-      <button class={{button: true,
+      <button class={button: true,
                       "is-rounded": @rounded,
-                      "is-info": true }}
-              style={{width: styleWidth(@widths[:label]) }} >
-        {{ @name || key(@var) }}
+                      "is-info": true }
+              style={width: styleWidth(@widths[:label]) } >
+        { @name || key(@var) }
       </button>
-      <button class={{button: true }}
-        style={{width: styleWidth(@widths[:number]) }}>
-        {{value(@var) |> format(@digits)}}
+      <button class={button: true }
+        style={width: styleWidth(@widths[:number]) }>
+        {value(@var) |> format(@digits)}
       </button>
-      <button id={{@id <> "decrBtn"}} class={{button: true}}
+      <button id={@id <> "decrBtn"} class={button: true}
               :on-click="decr"
               phx-value-action="decr"
               phx-hook="PhxRepeatClick"
-              rounded={{@rounded}}
-          >▼</button>
+              rounded={@rounded}>▼</button>
       <progress
-        class={{"progress",
+        class={"progress",
                 "is-radiusless",
-                "is-fullwidth"}}
-        max={{@max - @min}}
-        style={{width: to_string(@widths[:progress] || 4) <> "em",  "min-height": "2.4em", "margin-top": "1em"}}
-        value={{@var |> value() |> Kernel.-(@min)}} >
+                "is-fullwidth"}
+        max={@max - @min}
+        style={width: to_string(@widths[:progress] || 4) <> "em",  "min-height": "2.4em", "margin-top": "1em"}
+        value={@var |> value() |> Kernel.-(@min)} >
       </progress>
-      <button id={{@id <> "incrBtn"}}
-              class={{button: true}}
+      <button id={@id <> "incrBtn"}
+              class={button: true}
               :on-click="incr"
               phx-value-action="incr"
               phx-hook="PhxRepeatClick"
-              rounded={{@rounded}}>▲</button>
+              rounded={@rounded}>▲</button>
     </div>
     """
   end

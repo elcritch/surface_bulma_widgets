@@ -1,4 +1,4 @@
-defmodule SurfaceBulmaWidgets.Components.NumberEditor do
+defmodule SurfaceBulmaWidgets.Components.ModalFieldEditor do
   use Surface.LiveComponent
   use SurfaceBulmaWidgets
   alias SurfaceBulma.Button
@@ -16,13 +16,13 @@ defmodule SurfaceBulmaWidgets.Components.NumberEditor do
   """
 
   @doc "If modal should be shown or not, defaults to false"
-  prop(show, :boolean, default: false)
+  prop show, :boolean, default: false
 
   @doc "If modal should show close button at top right of darkened background"
-  prop(show_close_button, :boolean, default: true)
+  prop show_close_button, :boolean, default: true
 
   @doc "The event the modal emits if you click the close button, silently ignored if show close button is not set"
-  prop(close_button_event, :event)
+  prop close_button_event, :event
 
   prop var, :tuple, default: {nil, 0}
 
@@ -30,28 +30,28 @@ defmodule SurfaceBulmaWidgets.Components.NumberEditor do
   # slot(default, required: true)
 
   def number_pad(assigns) do
-    ~H"""
-        <form :on-change="select" :on-submit="submitted">
-      <div class="field has-addons">
-          <div class="control">
-            <a class="button is-info is-large">
-              Search
-            </a>
-          </div>
-          <div class="control is-flex-grow-3">
-              <input class="input is-large" type="number" id="tentacles" name="tentacles" min="10" max="100">
-          </div>
-      </div>
-        </form>
+    ~F"""
+      <form :on-change="select" :on-submit="submitted">
+        <div class="field has-addons">
+            <div class="control">
+              <a class="button is-info is-large">
+                Search
+              </a>
+            </div>
+            <div class="control is-flex-grow-3">
+                <input class="input is-large" type="number" id="tentacles" name="tentacles" min="10" max="100">
+            </div>
+        </div>
+      </form>
     """
 
   end
   def render(assigns) do
-    ~H"""
+    ~F"""
       <div>
-        <Modal classes={{["is-justify-content-flex-start"]}} show={{value(@var)}}>
-          <Card classes={{["pt-0"]}}>
-                {{ number_pad(assigns) }}
+        <Modal classes={["is-justify-content-flex-start"]} show={ value(@var) } >
+          <Card classes={["pt-0"]}>
+                { number_pad(assigns) }
 
             <Card.Footer>
                 <a href="#" class="card-footer-item">Save</a>

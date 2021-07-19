@@ -12,10 +12,10 @@ defmodule SurfaceBulmaWidgets.UI.Counter do
   # data count, :integer, default: 0
 
   def render(assigns) do
-    ~H"""
+    ~F"""
     <div class="buttons has-addons is-centered">
-      <Button rounded>{{ value(@count) }}</Button>
-      <Button rounded>{{ key(@count) }}</Button>
+      <Button rounded>{ value(@count) }</Button>
+      <Button rounded>{ key(@count) }</Button>
       <Button click="incr" rounded>+</Button>
       <Button click="decr" rounded>-</Button>
     </div>

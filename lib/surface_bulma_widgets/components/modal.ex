@@ -25,13 +25,13 @@ defmodule SurfaceBulmaWidgets.Components.Modal do
   slot(default, required: true)
 
   def render(assigns) do
-    ~H"""
-    <div class={{["modal"] ++ @classes ++ ["is-active": @show] }}>
+    ~F"""
+    <div class={["modal"] ++ @classes ++ ["is-active": @show] }>
       <div class="modal-background"></div>
         <div class="modal-content">
           <slot/>
         </div>
-        <Button type={{nil}} :if={{@show_close_button}} click={{@close_button_event}} class="modal-close is-large" aria_label="close"></Button>
+        <Button type={nil} :if={@show_close_button} click={@close_button_event} class="modal-close is-large" aria_label="close"></Button>
       </div>
     """
   end

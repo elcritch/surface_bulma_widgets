@@ -14,13 +14,13 @@ defmodule SurfaceBulmaWidgets.UI.NumberFlex do
   prop classes, :list, default: []
 
   def render(assigns) do
-    ~H"""
-      <article class="message is-small is-marginless {{@classes}}" >
+    ~F"""
+      <article class="message is-small is-marginless {@classes}" >
         <div class="message-header is-primary py-1" >
-          {{ @name || @id }}
+          { @name || @id }
         </div>
         <div class="message-body py-1 " >
-          {{value(@value) |> format(@digits)}}
+          {value(@value) |> format(@digits)}
         </div>
       </article>
     """

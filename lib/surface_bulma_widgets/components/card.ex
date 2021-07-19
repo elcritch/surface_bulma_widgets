@@ -35,13 +35,13 @@ defmodule SurfaceBulmaWidgets.Components.Card do
   prop classes, :any, default: []
 
   def render(assigns) do
-    ~H"""
-    <div class={{ ["card"] ++ @classes }} >
+    ~F"""
+    <div class={ ["card"] ++ @classes } >
       <div class="card-content ">
         <slot />
       </div>
 
-      <footer :if={{slot_assigned?(:footer)}} class="card-footer">
+      <footer :if={slot_assigned?(:footer)} class="card-footer">
           <slot name="footer" />
       </footer>
     </div>
