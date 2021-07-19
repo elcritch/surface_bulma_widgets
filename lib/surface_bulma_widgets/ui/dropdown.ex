@@ -55,26 +55,9 @@ defmodule SurfaceBulmaWidgets.UI.Dropdown do
 
   def handle_event("select", data, socket) do
     Logger.warn("dropwdown selected: #{inspect data }")
-    v! = value_parser(socket, data)
+    v! = value_parser(socket, data["value"])
     socket |> binding_update(:var, fn _v -> v! end)
     {:noreply, socket}
   end
 
-  def value_parser(%{assigns: assigns}, %{"value" => data}, default \\ nil) do
-    Logger.warn("dropwdown selected: parsed: floats: #{inspect assigns[:floats]}")
-    Logger.warn("dropwdown selected: parsed: integers: #{inspect assigns[:integers]}")
-    cond do
-      assigns[:floats] ->
-        case data |> Float.parse() do
-          {number, _rest} -> number
-          :error -> default or :error
-        end
-      assigns[:integers] ->
-        case data |> Integer.parse() do
-          {number, _rest} -> number
-          :error -> default or :error
-        end
-      true -> data
-    end
-  end
 end

@@ -18,7 +18,12 @@ defmodule SurfaceBulmaWidgets.Components.ModalFieldEditor do
   @doc "If modal should be shown or not, defaults to false"
   prop active, :boolean, default: false
 
+  prop value, :number, default: nil
+
   prop var, :tuple, default: {nil, 0}
+
+  prop min, :number, default: 0
+  prop max, :number, default: 100
 
   @doc "Header content, use via Modal.Header"
   # slot(default, required: true)
@@ -33,7 +38,7 @@ defmodule SurfaceBulmaWidgets.Components.ModalFieldEditor do
               </a>
             </div>
             <div class="control is-flex-grow-3">
-                <input class="input is-large" type="number" id="tentacles" name="tentacles" min="10" max="100">
+                <input class="input is-large" type="number" id="value" name="value" min={@min} max={@max}>
             </div>
         </div>
       </form>
@@ -65,7 +70,6 @@ defmodule SurfaceBulmaWidgets.Components.ModalFieldEditor do
 
   def handle_event("editor-click", data, socket) do
     Logger.warn("number-editor selected: #{inspect data }")
-    # v! = value_parser(socket, data)
     case data["value"] do
       "close" ->
         socket |> binding_update(:var, fn _v -> false end)
@@ -76,10 +80,8 @@ defmodule SurfaceBulmaWidgets.Components.ModalFieldEditor do
   end
 
   def handle_event("editor-save", data, socket) do
-    Logger.warn("number-editor save: #{inspect data }")
-    # v! = value_parser(socket, data)
-    socket |> binding_update(:var, fn _v -> 0.2 end)
-
+    Logger.warn("number-editor save: #{inspect data} from: #{inspect socket.assigns.value }")
+    socket |> binding_update(:var, fn _v -> socket.assigns.value end)
     {:noreply, socket}
   end
 
@@ -96,6 +98,12 @@ defmodule SurfaceBulmaWidgets.Components.ModalFieldEditor do
   def handle_event("editor-open", data, socket) do
     Logger.warn("number-editor open")
     {:noreply, socket |> update(:active, fn _ -> true end)}
+  end
+
+  def handle_event("select", data, socket) do
+    val = number_parser(:float, data["value"])
+    Logger.warn("number-editor edited: value: #{inspect val} from #{inspect data}")
+    {:noreply, socket |> update(:value, fn _v -> val end)}
   end
 
   def handle_event(evt, data, socket) do
