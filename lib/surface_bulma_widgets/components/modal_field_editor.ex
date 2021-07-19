@@ -38,7 +38,7 @@ defmodule SurfaceBulmaWidgets.Components.ModalFieldEditor do
               </a>
             </div>
             <div class="control is-flex-grow-3">
-                <input class="input is-large" type="number" id="value" name="value" min={@min} max={@max}>
+                <input class="input is-large" type="number" id="value" name="value" value={@value || value(@var)} min={@min} max={@max}>
             </div>
         </div>
       </form>
@@ -87,7 +87,8 @@ defmodule SurfaceBulmaWidgets.Components.ModalFieldEditor do
 
   def handle_event("editor-reset", data, socket) do
     Logger.warn("number-editor reset")
-    {:noreply, socket}
+    # val = number_parser(:float, data["value"])
+    {:noreply, socket |> update(:value, fn _ -> socket.assigns.var |> value() end)}
   end
 
   def handle_event("editor-cancel", data, socket) do
