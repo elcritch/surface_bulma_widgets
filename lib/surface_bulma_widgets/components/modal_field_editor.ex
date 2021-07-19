@@ -16,13 +16,7 @@ defmodule SurfaceBulmaWidgets.Components.ModalFieldEditor do
   """
 
   @doc "If modal should be shown or not, defaults to false"
-  prop show, :boolean, default: false
-
-  @doc "If modal should show close button at top right of darkened background"
-  prop show_close_button, :boolean, default: true
-
-  @doc "The event the modal emits if you click the close button, silently ignored if show close button is not set"
-  prop close_button_event, :event
+  prop active, :boolean, default: false
 
   prop var, :tuple, default: {nil, 0}
 
@@ -35,7 +29,7 @@ defmodule SurfaceBulmaWidgets.Components.ModalFieldEditor do
         <div class="field has-addons">
             <div class="control">
               <a class="button is-info is-large">
-                Search
+                { @var |> key() }
               </a>
             </div>
             <div class="control is-flex-grow-3">
@@ -49,21 +43,20 @@ defmodule SurfaceBulmaWidgets.Components.ModalFieldEditor do
   def render(assigns) do
     ~F"""
       <div>
-        <Modal classes={["is-justify-content-flex-start"]} show={ value(@var) } >
+        <Modal classes={["is-justify-content-flex-start"]} show={@active} >
           <Card classes={["pt-0"]}>
-                { number_pad(assigns) }
+
+            {assigns |> number_pad()}
 
             <Card.Footer>
-                <a href="#" class="card-footer-item">Save</a>
-                <a href="#" class="card-footer-item">Reset</a>
-                <a href="#" class="card-footer-item">Cancel</a>
+                <a class="card-footer-item" :on-click="editor-save"> Save </a>
+                <a class="card-footer-item" :on-click="editor-reset"> Reset </a>
+                <a class="card-footer-item" :on-click="editor-cancel"> Cancel </a>
             </Card.Footer>
           </Card>
         </Modal>
 
-        <Button
-          click="editor-click"
-          aria_label="open">
+        <Button click="editor-open" aria_label="open">
           Edit
         </Button>
       </div>
@@ -82,10 +75,27 @@ defmodule SurfaceBulmaWidgets.Components.ModalFieldEditor do
     {:noreply, socket}
   end
 
-  def handle_event("editor-set", data, socket) do
-    Logger.warn("number-editor set: #{inspect data }")
-    socket |> binding_update(:var, fn _v -> false end)
+  def handle_event("editor-save", data, socket) do
+    Logger.warn("number-editor save: #{inspect data }")
+    # v! = value_parser(socket, data)
+    socket |> binding_update(:var, fn _v -> 0.2 end)
+
     {:noreply, socket}
+  end
+
+  def handle_event("editor-reset", data, socket) do
+    Logger.warn("number-editor reset")
+    {:noreply, socket}
+  end
+
+  def handle_event("editor-cancel", data, socket) do
+    Logger.warn("number-editor cancel")
+    {:noreply, socket |> update(:active, fn _ -> false end)}
+  end
+
+  def handle_event("editor-open", data, socket) do
+    Logger.warn("number-editor open")
+    {:noreply, socket |> update(:active, fn _ -> true end)}
   end
 
   def handle_event(evt, data, socket) do

@@ -56,7 +56,6 @@ defmodule SurfaceBulmaWidgets.UI.Dropdown do
   def handle_event("select", data, socket) do
     Logger.warn("dropwdown selected: #{inspect data }")
     v! = value_parser(socket, data)
-
     socket |> binding_update(:var, fn _v -> v! end)
     {:noreply, socket}
   end
