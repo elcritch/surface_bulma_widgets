@@ -35,8 +35,7 @@ defmodule SurfaceBulmaWidgets.UI.NumberTag do
               rounded={@rounded} >
         { @name || @id }
       </span>
-      <span class={["number-display-rtag": true,
-                     tag: true] ++ @value_class } >
+      <span class={["number-display-rtag": true, tag: true] ++ @value_class } >
         <samp style={width: styleWidth(@widths[:number]) } >
         {value(@value) |> format(@digits)}
         </samp>

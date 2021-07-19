@@ -31,7 +31,7 @@ defmodule SurfaceBulmaWidgets.UI.RangedSlider do
   def render(assigns) do
     ~F"""
     <div class="buttons has-addons is-centered">
-      <button class={button: true,
+      <button class={"button": true,
                       "is-rounded": @rounded,
                       "is-info": true }
               style={width: styleWidth(@widths[:label]) } >
