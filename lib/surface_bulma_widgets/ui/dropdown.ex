@@ -13,7 +13,6 @@ defmodule SurfaceBulmaWidgets.UI.Dropdown do
   # prop kind, :atom, values: [:string, :integer, :float]
   prop integers, :boolean, default: false
   prop floats, :boolean, default: false
-  prop hoverable, :boolean, default: false
   prop active, :boolean, default: false
 
   prop var, :tuple, default: {nil, 0}
@@ -22,13 +21,9 @@ defmodule SurfaceBulmaWidgets.UI.Dropdown do
 
   def render(assigns) do
     ~F"""
-      <div class={["dropdown"] ++ cond do
-          @hoverable -> ["is-hoverable"]
-          @active -> ["is-active"]
-          true -> [""]
-        end}>
+      <div class={["dropdown": true, "is-active": @active] ++ @classes} >
         <div class="dropdown-trigger">
-          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+          <button class="button" :on-click="open" aria-haspopup="true" aria-controls="dropdown-menu">
             <div :if={@prefix != nil}>
               <span :if={@prefix != nil}>{@prefix}</span>
               <span>&nbsp;</span>
@@ -51,6 +46,11 @@ defmodule SurfaceBulmaWidgets.UI.Dropdown do
       </div>
 
     """
+  end
+
+  def handle_event("open", data, socket) do
+    Logger.warn("dropwdown open: #{inspect data}")
+    {:noreply, socket |> update(:active, & not &1)}
   end
 
   def handle_event("select", data, socket) do
