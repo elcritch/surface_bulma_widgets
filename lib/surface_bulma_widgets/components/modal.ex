@@ -22,11 +22,13 @@ defmodule SurfaceBulmaWidgets.Components.Modal do
 
   prop classes, :any, default: []
 
+  prop styles, :string, default: ""
+
   slot(default, required: true)
 
   def render(assigns) do
     ~F"""
-    <div class={["modal"] ++ @classes ++ ["is-active": @show] }>
+    <div class={["modal"] ++ @classes ++ ["is-active": @show] } style={@styles}>
       <div class="modal-background"></div>
         <div class="modal-content">
           <slot/>

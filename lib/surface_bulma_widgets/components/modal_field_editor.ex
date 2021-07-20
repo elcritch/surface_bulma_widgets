@@ -18,6 +18,8 @@ defmodule SurfaceBulmaWidgets.Components.ModalFieldEditor do
   @doc "If modal should be shown or not, defaults to false"
   prop active, :boolean, default: false
 
+  prop title, :string, default: nil
+
   prop value, :number, default: nil
 
   prop var, :tuple, default: {nil, 0}
@@ -34,17 +36,26 @@ defmodule SurfaceBulmaWidgets.Components.ModalFieldEditor do
         <div class="field has-addons">
             <div class="control">
               <a class="button is-info is-large">
-                { @var |> key() }
+                { @title || key(@var) }
               </a>
             </div>
-            <div class="control is-flex-grow-3">
-                <input class="input is-large" type="number" id="value" name="value" value={@value || value(@var)} min={@min} max={@max}>
+            <div class="control is-flex-grow-3" >
+                <input class="input is-large"
+                        type="number"
+                        id="value"
+                        name="value"
+                        value={@value || value(@var)}
+                        min={@min}
+                        max={@max}
+                        autofocus>
             </div>
         </div>
       </form>
     """
 
   end
+
+
   def render(assigns) do
     ~F"""
       <div>
