@@ -39,14 +39,15 @@ defmodule SurfaceBulmaWidgets.Components.ModalFieldEditor do
                 { @title || key(@var) }
               </a>
             </div>
-            <div class="control is-flex-grow-3" >
+            <div id={@id <> "-inputFld"}class="control is-flex-grow-3" >
                 <input class="input is-large"
                         type="number"
                         name="value"
                         value={@value || value(@var)}
                         min={@min}
                         max={@max}
-                        autofocus>
+                        phx-hook="PhxDoFocus"
+                        :if={@active} >
             </div>
         </div>
         <p class="help is-danger" :if={@value == :error} >
@@ -67,7 +68,9 @@ defmodule SurfaceBulmaWidgets.Components.ModalFieldEditor do
             {assigns |> number_pad()}
 
             <Card.Footer>
-                <button class="button card-footer-item is-light is-info" :on-click="editor-save" disabled={@value in [:error, nil]}> Save </button>
+                <button class="button card-footer-item is-light is-info"
+                        :on-click="editor-save"
+                        disabled={@value in [:error, nil]}> Save </button>
                 <button class="button card-footer-item is-light is-warning" :on-click="editor-reset"> Reset </button>
                 <button class="button card-footer-item is-light is-danger" :on-click="editor-cancel"> Cancel </button>
             </Card.Footer>
