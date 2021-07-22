@@ -64,12 +64,12 @@ defmodule SurfaceBulmaWidgets.Bindings do
       :float ->
         case data |> Float.parse() do
           {number, _rest} -> number
-          :error -> default or :error
+          :error -> default || :error
         end
       :integer ->
         case data |> Integer.parse() do
           {number, _rest} -> number
-          :error -> default or :error
+          :error -> default || :error
         end
     end
   end

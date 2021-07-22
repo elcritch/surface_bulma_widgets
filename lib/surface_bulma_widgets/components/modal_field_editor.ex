@@ -42,7 +42,6 @@ defmodule SurfaceBulmaWidgets.Components.ModalFieldEditor do
             <div class="control is-flex-grow-3" >
                 <input class="input is-large"
                         type="number"
-                        id="value"
                         name="value"
                         value={@value || value(@var)}
                         min={@min}
@@ -50,6 +49,9 @@ defmodule SurfaceBulmaWidgets.Components.ModalFieldEditor do
                         autofocus>
             </div>
         </div>
+        <p class="help is-danger" :if={@value == :error} >
+          Invalid Number
+        </p>
       </form>
     """
 
@@ -65,9 +67,9 @@ defmodule SurfaceBulmaWidgets.Components.ModalFieldEditor do
             {assigns |> number_pad()}
 
             <Card.Footer>
-                <a class="card-footer-item" :on-click="editor-save"> Save </a>
-                <a class="card-footer-item" :on-click="editor-reset"> Reset </a>
-                <a class="card-footer-item" :on-click="editor-cancel"> Cancel </a>
+                <button class="button card-footer-item is-light is-info" :on-click="editor-save" disabled={@value in [:error, nil]}> Save </button>
+                <button class="button card-footer-item is-light is-warning" :on-click="editor-reset"> Reset </button>
+                <button class="button card-footer-item is-light is-danger" :on-click="editor-cancel"> Cancel </button>
             </Card.Footer>
           </Card>
         </Modal>
@@ -99,7 +101,7 @@ defmodule SurfaceBulmaWidgets.Components.ModalFieldEditor do
   def handle_event("editor-reset", data, socket) do
     Logger.warn("number-editor reset")
     # val = number_parser(:float, data["value"])
-    {:noreply, socket |> update(:value, fn _ -> socket.assigns.var |> value() end)}
+    {:noreply, socket |> update(:value, fn _ -> nil end)}
   end
 
   def handle_event("editor-cancel", data, socket) do

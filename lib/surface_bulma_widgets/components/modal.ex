@@ -15,7 +15,7 @@ defmodule SurfaceBulmaWidgets.Components.Modal do
   prop(show, :boolean, default: false)
 
   @doc "If modal should show close button at top right of darkened background"
-  prop(show_close_button, :boolean, default: true)
+  prop(show_close_button, :boolean, default: false)
 
   @doc "The event the modal emits if you click the close button, silently ignored if show close button is not set"
   prop(close_button_event, :event)
